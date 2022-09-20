@@ -119,5 +119,27 @@ namespace Guestbooks.Services
             }
         }
         #endregion
+
+        #region 刪除
+        public void DeleteGuestbooks (int id)
+        {
+            //Sql
+            string sql = $@"DELETE FROM Guestbooks WHERE id = {id}; ";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
     }
 }

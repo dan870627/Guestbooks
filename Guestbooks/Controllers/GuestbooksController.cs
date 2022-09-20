@@ -50,5 +50,13 @@ namespace Guestbooks.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region 刪除
+        public ActionResult Delete(int id)
+        {
+            GuestbookService.DeleteGuestbooks(id);
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }
