@@ -14,12 +14,12 @@ namespace Guestbooks.Services
         private readonly static string cnstr = ConfigurationManager.ConnectionStrings["Guestbook"].ConnectionString;
         private readonly SqlConnection conn = new SqlConnection(cnstr);
 
-        //顯示
+        #region 顯示
         public List<Guestbook> GetDataList()
         {
             List<Guestbook> DataList = new List<Guestbook>();
             //Sql
-            string sql = @"SELECT * FROM [Guestbook0921].[dbo].[Guestbooks]; ";
+            string sql = @"SELECT * FROM Guestbooks; ";
             try
             {
                 conn.Open();
@@ -45,5 +45,28 @@ namespace Guestbooks.Services
             }
             return DataList;
         }
+        #endregion
+
+        #region 新增
+        public void InsertGuestbooks (Guestbook newData)
+        {
+            //Sql $=內插變數 @=讓符號完整呈現
+            string sql = $@"INSERT INTO Guestbooks (Account, [Content], CreateTime) VALUES ( '{newData.Account}', '{newData.Content}', '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' ); ";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
     }
 }
