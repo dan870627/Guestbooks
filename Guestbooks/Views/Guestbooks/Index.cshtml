@@ -38,6 +38,11 @@
                     @item.Content
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ActionLink("修改留言", "Edit", new { Id = item.id })
+                </td>
+            </tr>
         }
     }
     else

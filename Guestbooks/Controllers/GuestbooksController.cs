@@ -35,5 +35,20 @@ namespace Guestbooks.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #region 修改
+        public ActionResult Edit (int id)
+        {
+            Guestbook Data = GuestbookService.GetDataById(id);
+            return View(Data);
+        }
+        [HttpPost]
+        public ActionResult Edit(int id, [Bind(Include = "Account, Content")]Guestbook UpdateData)
+        {
+            UpdateData.id = id;
+            GuestbookService.UpdateGuestbooks(UpdateData);
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }

@@ -1,0 +1,39 @@
+﻿@model Guestbooks.Models.Guestbook
+
+@{
+    ViewBag.Title = "修改留言";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <h3>修改留言</h3>
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Account)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Account)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Content)
+            </td>
+            <td>
+                @Html.TextBoxFor(model => model.Content)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="修改留言" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
